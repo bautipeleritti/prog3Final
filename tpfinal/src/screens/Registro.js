@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Text, View, StyleSheet, TouchableOpacity, TextInput } from 'react-native'
 
-import { auth } from '../firebase/config'
+import { auth, db } from '../firebase/config'
 
 export class Registro extends Component {
   constructor(props) {
@@ -17,22 +17,35 @@ export class Registro extends Component {
     };
 
   }
-  handleSubmit(email, password) {
-    auth.createUserWithEmailAndPassword(email, password)
-      .then(response => this.setState({ registered: true, errMsg: "" }))
-      .catch((error) => {
-        console.log(error.errMsg);
-        this.setState({ errMsg: error.errMsg });
-      });
+  onSubmit = () => {
+    auth.createUserWithEmailAndPassword(this.state.email, this.state.password)
+      .then((response) => {
+        if (response) {
+          db.collection('users').add({
+            email: this.state.email,
+            userName: this.state.userName,
+            createdAt: Date.now()
+          })
+            .then((response) => {
+              this.setState({ registered: true, errMsg: "" })
+              this.props.navigation.navigate('Login')
+            })
+            .catch((error) => {
+              console.log(error.message);
+              this.setState({ errMsg: error.message });
+            });
+        }
+      })
+
 
   }
 
   render() {
     return (
-      <View>
+      <View style={styles.box}>
         <Text> Crea una cuenta!</Text>
 
-        <TextInput 
+        <TextInput
           style={styles.input}
           keyboardType='email-address'
           placeholder='email'
@@ -41,29 +54,44 @@ export class Registro extends Component {
 
         />
 
-        <TextInput 
+        <TextInput
           style={styles.input}
-          keyboardType=''
+          keyboardType='default'
           placeholder='userName'
           onChangeText={text => this.setState({ userName: text })}
           value={this.state.userName}
         />
 
-        <TextInput 
+        <TextInput
           style={styles.input}
           keyboardType='default'
-          placeholder=''
+          placeholder='password'
           secureTextEntry={true}
           onChangeText={text => this.setState({ password: text })}
           value={this.state.password} />
+
+        <TouchableOpacity onPress={() => this.onSubmit(this.state.email, this.state.password)}>
+          <Text> Registrarte </Text>
+        </TouchableOpacity>
+        {this.state.errMsg && <Text>{this.state.errMsg}</Text>}
 
       </View>
     )
   }
 }
 
-const styles= StyleSheet.create({
-
+const styles = StyleSheet.create({
+  input: {
+    width: '25%',
+    padding: 10,
+    marginVertical: 10,
+    borderColor: 'black',
+    borderWidth: 1,
+    borderRadius: 5,
+  },
+  box:{
+    
+  }
 })
 
 export default Registro
