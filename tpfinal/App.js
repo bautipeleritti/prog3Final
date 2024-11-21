@@ -5,6 +5,7 @@ import{createNativeStackNavigator} from '@react-navigation/native-stack';
 import { auth } from './src/firebase/config';
 import Registro from './src/screens/Registro';
 import Login from './src/screens/Login';
+import Home from './src/screens/Home';
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -14,6 +15,7 @@ export default function App() {
         {/* <Stack.Screen name="Login" component={Login} /> */}
         <Stack.Screen name="Registro" component={Registro} />
         <Stack.Screen name="Login" component= {Login} />
+        <Stack.Screen name="Home" component= {Home} />
        
       </Stack.Navigator>
 

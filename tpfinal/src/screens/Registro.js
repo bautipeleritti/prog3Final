@@ -74,6 +74,8 @@ export class Registro extends Component {
           <Text> Registrarte </Text>
         </TouchableOpacity>
         {this.state.errMsg && <Text>{this.state.errMsg}</Text>}
+        <TouchableOpacity style = {styles.Registerbutton} 
+        onPress={() => this.props.navigation.navigate("Login")}><Text>Ir a login</Text></TouchableOpacity>
 
       </View>
     )

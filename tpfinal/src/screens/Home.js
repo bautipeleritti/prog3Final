@@ -1,38 +1,32 @@
-import { StyleSheet,Text,View,FlatList } from "react-native"
+import react, {Component} from "react";
+import { ActivityIndicator, FlatList, StyleSheet, Text, View } from 'react-native';
+import Post from "../components/Post";
+import { db } from "../firebase/config";
 
 class Home extends Component{
-    constructor(props){
-        super(props)
+    constructor() {
+        super();
+        this.state = {
+            
 
-        this.state ={
-            posts: []
-        }
-        }
+              
+        };
+    }
+    
+
+
+    componentDidMount(){
+        
     }
 
-  //  componentDidMount(){
-   //     db.collection('posts').onSnapshot(
-    //        docs => {
-    //            let posts = []
-     //           docs.forEach(doc => {
-      //              posts.push({
-       //                 id: doc.id,
-        //                data: doc.data()
-        //            })
-         //       })
-          //  }
-       // )
-   // }
 
+    render(){
+        return(
+        <View>
+            <Text> Home</Text>
+           
+        </View>
+    )}
+}
 
-
-    //render(){
-    //return(
-     //   <p>Hla</p>
-      //  )
-   // }
-   
-//}
-
-
-export default Home
+export default Home;

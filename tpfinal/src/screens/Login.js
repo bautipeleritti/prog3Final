@@ -42,7 +42,7 @@ export class Login extends Component {
         secureTextEntry={true}
         onChangeText={text => this.setState({password:text})}
         value={this.state.password} />
-        {this.state.error ? <Text style={styles.errorText}>{this.state.error}</Text> : null}
+       <Text>{this.state.error ? <Text style={styles.errorText}>{this.state.error}</Text> : null}</Text>
 
         <TouchableOpacity style = {styles.Loginbutton} onPress={()=> this.handleSubmitLogin()}>
           <Text>Login</Text>
