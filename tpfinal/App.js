@@ -7,6 +7,7 @@ import Registro from './src/screens/Registro';
 import Login from './src/screens/Login';
 import Home from './src/screens/Home';
 import CrearPost from './src/screens/CrearPost';
+import Profile from './src/screens/Profile';
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -18,6 +19,7 @@ export default function App() {
         {/* <Stack.Screen name="Login" component={Login} /> */}
         <Stack.Screen name="Registro" component={Registro} />
         <Stack.Screen name="Login" component= {Login} />
+        <Stack.Screen name="Profile" component= {Profile} />
         <Stack.Screen name="Home" component= {Home} />
         <Stack.Screen name="CrearPost" component= {CrearPost} />
        

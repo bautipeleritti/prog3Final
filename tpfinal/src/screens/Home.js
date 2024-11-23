@@ -36,12 +36,16 @@ class Home extends Component {
         }
         )
     }
+    
 
 
     render() {
         return (
             <View>
-                <Text> </Text>
+                <Text> Bienvenido a Home </Text>
+                <TouchableOpacity onPress={() => navigation.navigate('Perfil')} style={styles.button}>
+        <Text>Ir a Mi Perfil</Text>
+      </TouchableOpacity>
 
                 {this.state.loading ? <ActivityIndicator /> : <FlatList data={this.state.posts} keyExtractor={(item) => item.id.toString()} renderItem={({ item }) => <Post dataPost={item} />} />}
                 <TouchableOpacity onPress={() => this.props.navigation.navigate("CrearPost")}><Text>Crear Post</Text></TouchableOpacity>
