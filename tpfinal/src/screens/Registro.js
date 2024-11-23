@@ -17,6 +17,19 @@ export class Registro extends Component {
     };
 
   }
+
+  /* componentDidMount() {
+    auth.onAuthStateChanged((usuario) => {
+      if (usuario) {
+        this.props.navigation.navigate("Home")
+      }
+
+    }
+    )
+  } */
+
+
+
   onSubmit = () => {
     auth.createUserWithEmailAndPassword(this.state.email, this.state.password)
       .then((response) => {
@@ -74,8 +87,8 @@ export class Registro extends Component {
           <Text> Registrarte </Text>
         </TouchableOpacity>
         {this.state.errMsg && <Text>{this.state.errMsg}</Text>}
-        <TouchableOpacity style = {styles.RegistButton} 
-        onPress={() => this.props.navigation.navigate("Login")}><Text>Ir a login</Text></TouchableOpacity>
+        <TouchableOpacity style={styles.RegistButton}
+          onPress={() => this.props.navigation.navigate("Login")}><Text>Ir a login</Text></TouchableOpacity>
 
       </View>
     )
@@ -87,7 +100,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     textAlign: 'center',
-    justifyContent:'center',
+    justifyContent: 'center',
   },
   RegistButton: {
     marginTop: 10,
@@ -107,15 +120,15 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 5,
     fontSize: 15,
-    backgroundColor:'white'
+    backgroundColor: 'white'
   },
-  box:{
-    flex:1,
+  box: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor:'lightblue'
+    backgroundColor: 'lightblue'
 
-    
+
   }
 })
 

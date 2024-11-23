@@ -12,7 +12,7 @@ const Stack = createNativeStackNavigator();
 export default function App() {
   return (
 
-    
+<View style={styles.container}>
   <NavigationContainer>
      <Stack.Navigator screenOptions={{ headerShown: true }}>
         {/* <Stack.Screen name="Login" component={Login} /> */}
@@ -24,14 +24,14 @@ export default function App() {
       </Stack.Navigator>
 
   </NavigationContainer>
+  </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor:"lightblue",
+    fontFamily:'Arial, sans-serif'
   },
 });
