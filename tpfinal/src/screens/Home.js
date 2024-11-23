@@ -1,7 +1,7 @@
 import react, { Component } from "react";
 import { ActivityIndicator, FlatList, StyleSheet, Text, View } from 'react-native';
 import Post from "../components/Post";
-import { db } from "../firebase/config";
+import { db, auth } from "../firebase/config";
 import { TouchableOpacity } from "react-native";
 
 class Home extends Component {
@@ -9,6 +9,7 @@ class Home extends Component {
         super();
         this.state = {
             posts: [],
+            email: auth.currentUser,
             loading: true,
         };
     }
@@ -37,14 +38,23 @@ class Home extends Component {
         )
     }
     
+goToProfile = () => {
+    const currentUser = auth.currentUser; 
+    if (currentUser) {
+      this.props.navigation.navigate("Perfil", { email: currentUser.email }); 
+    } else {
+      console.error("No hay un usuario autenticado.");
+    }
+  };
+    
 
 
     render() {
         return (
             <View>
                 <Text> Bienvenido a Home </Text>
-                <TouchableOpacity onPress={() => navigation.navigate('Perfil')} style={styles.button}>
-        <Text>Ir a Mi Perfil</Text>
+                <TouchableOpacity onPress={this.goToProfile}>
+      <Text>Ir a Mi Perfil</Text>
       </TouchableOpacity>
 
                 {this.state.loading ? <ActivityIndicator /> : <FlatList data={this.state.posts} keyExtractor={(item) => item.id.toString()} renderItem={({ item }) => <Post dataPost={item} />} />}

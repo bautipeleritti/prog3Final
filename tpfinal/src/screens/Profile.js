@@ -6,7 +6,7 @@ export default class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: auth.currentUser,
+      email: auth.currentUser.email,
       posteos: [],
     };
   }
@@ -60,7 +60,7 @@ export default class Profile extends Component {
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => (
             <View style={styles.post}>
-              <Text>{item.title}</Text>
+              <Text>{item.data.content}</Text>
               <TouchableOpacity
                 style={styles.deleteButton}
                 onPress={() => this.handleDeletePost(item.id)}

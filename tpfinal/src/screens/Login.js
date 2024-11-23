@@ -1,100 +1,133 @@
-import React, { Component } from 'react'
-import {View, TextInput, Text, TouchableOpacity, StyleSheet, } from "react-native";
+import React, { Component } from 'react';
+import { View, TextInput, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { auth } from '../firebase/config';
-export class Login extends Component {
+
+export default class Login extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
-      email: "",
-      password: "",
-      error: ""
-    }
+      email: '',
+      password: '',
+      error: '',
+    };
   }
-  componentDidMount(){
+
+  componentDidMount() {
     auth.onAuthStateChanged((usuario) => {
       if (usuario) {
-        this.props.navigation.navigate("Home")
-        }
+        this.props.navigation.navigate('Home');
+      }
     });
   }
+
   handleSubmitLogin = () => {
-    const {email, password} = this.state
-    auth.signInWithEmailAndPassword(email, password)
-  .then(() => {
-    this.setState({ error: '', loading: false });
-    this.props.navigation.navigate('Home');
-  })
-  .catch((error) => {
-    this.setState({ error: "error", loading: false }); // Muestra el mensaje genérico de Firebase
-  });
+    const { email, password } = this.state;
 
-  }
+    if (!email || !password) {
+      this.setState({ error: 'Por favor completa todos los campos' });
+      return;
+    }
+
+    auth
+      .signInWithEmailAndPassword(email, password)
+      .then(() => {
+        this.setState({ error: '' });
+        this.props.navigation.navigate('Home');
+      })
+      .catch((error) => {
+        this.setState({ error: "error"});
+      });
+  };
+
   render() {
+    const { email, password, error } = this.state;
+
     return (
-      <View style ={styles.box}>
-        <Text>Login</Text>
-        <TextInput style = {styles.input}
-        keyboardType='email-address'
-        placeholder='email'
-        onChangeText={text => this.setState({email:text})}
-        value = {this.state.email}/>
-        <TextInput style={styles.input}
-        keyboardType='default'
-        placeholder='password'
-        secureTextEntry={true}
-        onChangeText={text => this.setState({password:text})}
-        value={this.state.password} />
-       <Text>{this.state.error ? <Text style={styles.errorText}>{this.state.error}</Text> : null}</Text>
+      <View style={styles.box}>
+        <Text style={styles.title}>Login</Text>
+        
+        <TextInput
+          style={styles.input}
+          keyboardType="email-address"
+          placeholder="Email"
+          onChangeText={(text) => this.setState({ email: text })}
+          value={email}
+        />
 
-        <TouchableOpacity style = {styles.RegistButton} onPress={()=> this.handleSubmitLogin()}>
-          <Text>Login</Text>
+        <TextInput
+          style={styles.input}
+          keyboardType="default"
+          placeholder="Password"
+          secureTextEntry={true}
+          onChangeText={(text) => this.setState({ password: text })}
+          value={password}
+        />
+
+
+        <TouchableOpacity style={styles.loginButton} onPress={this.handleSubmitLogin}>
+          <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
-        <TouchableOpacity style = {styles.RegistButton} 
-        onPress={() => this.props.navigation.navigate("Registro")}>
-          <Text style= {styles.title}>
-            Si no tenes cuenta, Registrate acá
-          </Text>
-          </TouchableOpacity>
 
+        <TouchableOpacity
+          style={styles.registerButton}
+          onPress={() => this.props.navigation.navigate('Registro')}
+        >
+          <Text style={styles.registerText}>Si no tenés cuenta, registrate acá</Text>
+        </TouchableOpacity>
       </View>
-    )
+    );
   }
 }
+
 const styles = StyleSheet.create({
   title: {
-    fontSize: 18,
+    fontSize: 24,
     fontWeight: 'bold',
+    marginBottom: 20,
     textAlign: 'center',
-    justifyContent:'center',
   },
-  RegistButton: {
-    marginTop: 10,
+  box: {
+    flex: 1,
+    justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: 'lightblue',
+    padding: 20,
+  },
+  input: {
+    width: '80%',
     padding: 10,
+    marginVertical: 10,
+    borderColor: 'gray',
+    borderWidth: 1,
+    borderRadius: 5,
+    backgroundColor: 'white',
+    fontSize: 16,
+  },
+  loginButton: {
+    backgroundColor: 'blue',
+    padding: 10,
+    borderRadius: 5,
+    marginTop: 20,
+    width: '80%',
+    alignItems: 'center',
+  },
+  buttonText: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
+  registerButton: {
+    marginTop: 20,
+    alignItems: 'center',
+  },
+  registerText: {
+    color: 'darkblue',
+    fontSize: 14,
   },
   errorText: {
     color: 'red',
+    marginTop: 10,
     fontSize: 14,
     textAlign: 'center',
   },
-  input: {
-    width: '25%',
-    padding: 10,
-    marginVertical: 10,
-    borderColor: 'black',
-    borderWidth: 1,
-    borderRadius: 5,
-    fontSize: 15,
-    backgroundColor:'white'
-  },
-  box:{
-    flex:1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor:'lightblue'
-
-    
-  }
 });
-
-export default Login
