@@ -29,14 +29,14 @@ export class Login extends Component {
   }
   render() {
     return (
-      <View style ={StyleSheet.container}>
+      <View style ={styles.box}>
         <Text>Login</Text>
-        <TextInput style = {styles.Userinput}
+        <TextInput style = {styles.input}
         keyboardType='email-address'
         placeholder='email'
         onChangeText={text => this.setState({email:text})}
         value = {this.state.email}/>
-        <TextInput style={styles.Userinput}
+        <TextInput style={styles.input}
         keyboardType='default'
         placeholder='password'
         secureTextEntry={true}
@@ -44,12 +44,12 @@ export class Login extends Component {
         value={this.state.password} />
        <Text>{this.state.error ? <Text style={styles.errorText}>{this.state.error}</Text> : null}</Text>
 
-        <TouchableOpacity style = {styles.Loginbutton} onPress={()=> this.handleSubmitLogin()}>
+        <TouchableOpacity style = {styles.RegistButton} onPress={()=> this.handleSubmitLogin()}>
           <Text>Login</Text>
         </TouchableOpacity>
-        <TouchableOpacity style = {styles.Registerbutton} 
+        <TouchableOpacity style = {styles.RegistButton} 
         onPress={() => this.props.navigation.navigate("Register")}>
-          <Text style= {styles.Registertext}>
+          <Text style= {styles.title}>
             Si no tenes cuenta, Registrate acá
           </Text>
           </TouchableOpacity>
@@ -59,43 +59,40 @@ export class Login extends Component {
   }
 }
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 20,
-    backgroundColor: '#f5f5f5'
+  title: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    justifyContent:'center',
   },
-  Userinput: {
-    width: '100%',
-    height: 40,
-    borderColor: '#ccc',
-    borderWidth: 1,
-    borderRadius: 5,
-    marginBottom: 15,
-    backgroundColor: '#fff',
+  RegistButton: {
+    marginTop: 10,
+    alignItems: 'center',
+    padding: 10,
   },
   errorText: {
     color: 'red',
     fontSize: 14,
-    marginBottom: 10,
     textAlign: 'center',
   },
-  Loginbutton: {
-    backgroundColor: '#ccc',
-    width: '100%',
+  input: {
+    width: '25%',
     padding: 10,
+    marginVertical: 10,
+    borderColor: 'black',
+    borderWidth: 1,
     borderRadius: 5,
+    fontSize: 15,
+    backgroundColor:'white'
+  },
+  box:{
+    flex:1,
+    justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 15,
-  },
-  Registerbutton: {
-    marginTop: 10,
-  },
-  Registertext: {
-    color: '#cc',
-    textAlign: 'center',
-  },
+    backgroundColor:'lightblue'
+
+    
+  }
 });
 
 export default Login

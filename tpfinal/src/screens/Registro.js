@@ -74,7 +74,7 @@ export class Registro extends Component {
           <Text> Registrarte </Text>
         </TouchableOpacity>
         {this.state.errMsg && <Text>{this.state.errMsg}</Text>}
-        <TouchableOpacity style = {styles.Registerbutton} 
+        <TouchableOpacity style = {styles.RegistButton} 
         onPress={() => this.props.navigation.navigate("Login")}><Text>Ir a login</Text></TouchableOpacity>
 
       </View>
@@ -83,6 +83,22 @@ export class Registro extends Component {
 }
 
 const styles = StyleSheet.create({
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    justifyContent:'center',
+  },
+  RegistButton: {
+    marginTop: 10,
+    alignItems: 'center',
+    padding: 10,
+  },
+  errorText: {
+    color: 'red',
+    fontSize: 14,
+    textAlign: 'center',
+  },
   input: {
     width: '25%',
     padding: 10,
@@ -90,8 +106,15 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     borderWidth: 1,
     borderRadius: 5,
+    fontSize: 15,
+    backgroundColor:'white'
   },
   box:{
+    flex:1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor:'lightblue'
+
     
   }
 })
