@@ -18,7 +18,7 @@ export class Registro extends Component {
 
   }
 
-  /* componentDidMount() {
+   componentDidMount() {
     auth.onAuthStateChanged((usuario) => {
       if (usuario) {
         this.props.navigation.navigate("Home")
@@ -26,7 +26,7 @@ export class Registro extends Component {
 
     }
     )
-  } */
+  } 
 
 
 
