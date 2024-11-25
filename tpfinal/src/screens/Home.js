@@ -52,7 +52,7 @@ goToProfile = () => {
     render() {
         return (
             <View style = {styles.flatlist}>
-                <Text> Bienvenido a Home </Text>
+                <Text style = {styles.home}> Bienvenido a Home </Text>
                 <TouchableOpacity onPress={this.goToProfile}>
       <Text>Ir a Mi Perfil</Text>
       </TouchableOpacity>
@@ -68,6 +68,12 @@ const styles = StyleSheet.create(
         flatlist: {
             width: '100',
             flex: 1
+        },
+        home: {
+        fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 20,
+    textAlign: 'center'
         }
     }
 )

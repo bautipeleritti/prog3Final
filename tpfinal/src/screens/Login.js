@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, TextInput, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, TextInput, Text, TouchableOpacity, StyleSheet, ActivityIndicator } from 'react-native';
 import { auth } from '../firebase/config';
 
 export default class Login extends Component {
@@ -9,6 +9,7 @@ export default class Login extends Component {
       email: '',
       password: '',
       error: '',
+      loading: false
     };
   }
 
@@ -27,20 +28,21 @@ export default class Login extends Component {
       this.setState({ error: 'Por favor completa todos los campos' });
       return;
     }
+    this.setState({loading: true, error: ''})
 
     auth
       .signInWithEmailAndPassword(email, password)
       .then(() => {
-        this.setState({ error: '' });
+        this.setState({ error: '', loading: false });
         this.props.navigation.navigate('Home');
       })
       .catch((error) => {
-        this.setState({ error: "error"});
+        this.setState({ error: "Error al iniciar tu sesión", loading: false});
       });
   };
 
   render() {
-    const { email, password, error } = this.state;
+    const { email, password, error , loading} = this.state;
 
     return (
       <View style={styles.box}>
@@ -62,12 +64,18 @@ export default class Login extends Component {
           onChangeText={(text) => this.setState({ password: text })}
           value={password}
         />
+                {error ? <Text style={styles.errorText}>{error}</Text> : null}
 
-
-        <TouchableOpacity style={styles.loginButton} onPress={this.handleSubmitLogin}>
+        { loading ? (
+          <ActivityIndicator size="large" color="green" />
+        ) : (
+          <TouchableOpacity style={styles.loginButton} onPress={this.handleSubmitLogin}>
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
 
+        )}
+
+       
         <TouchableOpacity
           style={styles.registerButton}
           onPress={() => this.props.navigation.navigate('Registro')}

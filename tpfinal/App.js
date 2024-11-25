@@ -8,7 +8,7 @@ import Registro from './src/screens/Registro';
 import Login from './src/screens/Login';
 import Home from './src/screens/Home';
 import CrearPost from './src/screens/CrearPost';
-import Profile from './src/screens/profile';
+import Profile from './src/screens/Profile';
 const Stack = createNativeStackNavigator();
 //const Tab = createBottomTabNavigator();
 export default function App(){

@@ -6,52 +6,58 @@ export default class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: auth.currentUser.displayName, 
+      name: "", 
       email: auth.currentUser.email,
       posteos: [],
     };
   }
+
   componentDidMount() {
-    auth.onAuthStateChanged((user) => {
-      if (user) {
-        this.setState({
-          name: user.displayName || "Usuario sin nombre",
-          email: user.email,
-        });
-  
-        db.collection("posts")
-          .where("userEmail", "==", auth.currentUser.email)
-          .onSnapshot((docs) => {
-            let posts = [];
-            docs.forEach((doc) => {
-              posts.push({
-                id: doc.id,
-                data: doc.data(),
-              });
+    const user = auth.currentUser;
+
+    if (user) {
+      db.collection('users')
+        .where("email", "==", user.email)
+        .onSnapshot((docs) => {
+          docs.forEach((doc) => {
+            this.setState({
+              name: doc.data().userName || "Usuario sin nombre", 
             });
-            posts.sort((a, b) => b.data.createdAt - a.data.createdAt); 
-            this.setState({ posteos: posts });
           });
-      } else {
-      
-        this.props.navigation.navigate("Login");
-      }
-    });
+        });
+
+      db.collection("posts")
+        .where("email", "==", user.email)
+        .onSnapshot((docs) => {
+          let posts = [];
+          docs.forEach((doc) => {
+            posts.push({
+              id: doc.id,
+              data: doc.data(), 
+            });
+          });
+          posts.sort((a, b) => b.data.createdAt - a.data.createdAt);
+          this.setState({ posteos: posts });
+        });
+    } else {
+      this.props.navigation.navigate("Login");
+    }
   }
+
   handleDeletePost(postId) {
-    db.collection('posts')
+    db.collection("posts")
       .doc(postId)
       .delete()
       .then(() => {
-        console.log('Post eliminado correctamente');
+        console.log("Post eliminado correctamente");
       })
-      .catch((error) => alert('Error eliminando el post. Intenta de nuevo.'));
+      .catch((error => console.log(error)));
   }
 
   handleLogout() {
     auth.signOut()
-      .then(() => this.props.navigation.navigate('Login'))
-      .catch(() => alert('Error cerrando sesión. Intenta de nuevo.'));
+      .then(() => this.props.navigation.navigate("Login"))
+      .catch((e) => console.log(error));
   }
 
   render() {
@@ -61,22 +67,21 @@ export default class Profile extends Component {
         <Text style={styles.info}>Nombre de usuario: {this.state.name}</Text>
         <Text style={styles.info}>Email: {this.state.email}</Text>
         <Text style={styles.info}>Cantidad de posteos: {this.state.posteos.length}</Text>
-  <FlatList
-    data={this.state.posteos}
-    keyExtractor={(item) => item.id}
-    renderItem={({ item }) => (
-      <View style={styles.post}>
-        <Text style={styles.postContent}>{item.data.content || "Sin contenido"}</Text>
-        <TouchableOpacity
-          style={styles.deleteButton}
-          onPress={() => this.handleDeletePost(item.id)}
-        >
-          <Text style={styles.deleteButtonText}>Eliminar</Text>
-        </TouchableOpacity>
-      </View>
-    )}
-  />
-
+        <FlatList
+          data={this.state.posteos}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+            <View style={styles.post}>
+              <Text style={styles.postContent}>{item.data.texto || "Sin contenido"}</Text>
+              <TouchableOpacity
+                style={styles.deleteButton}
+                onPress={() => this.handleDeletePost(item.id)}
+              >
+                <Text style={styles.deleteButtonText}>Eliminar</Text>
+              </TouchableOpacity>
+            </View>
+          )}
+        />
         <Button title="Logout" onPress={() => this.handleLogout()} />
       </View>
     );
