@@ -82,8 +82,12 @@ export default class Profile extends Component {
             </View>
           )}
         />
-        <Button title="Logout" onPress={() => this.handleLogout()} />
-      </View>
+       <TouchableOpacity
+         style={styles.logOut}
+         onPress={() => this.handleLogout()}>
+        <Text style={styles.logOutText}>Logout</Text>
+        </TouchableOpacity>
+         </View>
     );
   }
 }
@@ -92,23 +96,29 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: 'lightgrey',
   },
   titulo: {
-    fontSize: 24,
+    fontSize: 30,
     fontWeight: 'bold',
     marginBottom: 20,
+    textAlign:'center'
   },
   info: {
     fontSize: 16,
     marginBottom: 10,
+    padding:15,
+    backgroundColor:"white",
+
+    
+
   },
   post: {
     padding: 15,
     marginVertical: 10,
     borderWidth: 1,
     borderColor: '#ccc',
-    borderRadius: 5,
+    borderRadius: 8,
     backgroundColor: '#fff',
   },
   postContent: {
@@ -116,13 +126,24 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   deleteButton: {
-    backgroundColor: '#d9534f',
+    backgroundColor: 'red',
     padding: 10,
     borderRadius: 5,
     alignItems: 'center',
   },
   deleteButtonText: {
-    color: '#fff',
+    color: 'white',
     fontWeight: 'bold',
+    fontSize:14,
   },
+  logOut:{
+    backgroundColor:"darkblue",
+    padding: 10,
+    borderRadius: 5,
+    alignItems: 'center',
+  },
+  logOutText:{
+    color: "white",
+    fontWeight: "bold",
+  }
 });

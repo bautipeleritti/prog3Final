@@ -27,6 +27,12 @@ export default class Login extends Component {
     if (!email || !password) {
       this.setState({ error: 'Por favor completa todos los campos' });
       return;
+    }else if(password.length < 6) {
+      this.setState({ error: "La contraseña tiene menos de 6 caracteres" });
+      return;
+    }else if(!email.includes("@")){
+      this.setState({error:"Completa con un email válido"})
+
     }
     this.setState({loading: true, error: ''})
 
@@ -37,7 +43,7 @@ export default class Login extends Component {
         this.props.navigation.navigate('HomeMenu');
       })
       .catch((error) => {
-        this.setState({ error: "Error al iniciar tu sesión", loading: false});
+        this.setState({ error : error.message , loading: false});
       });
   };
 
@@ -70,7 +76,7 @@ export default class Login extends Component {
           <ActivityIndicator size="large" color="green" />
         ) : (
           <TouchableOpacity style={styles.loginButton} onPress={this.handleSubmitLogin}>
-          <Text style={styles.buttonText}>Login</Text>
+          <Text style={styles.buttonText}>Iniciar Sesión</Text>
         </TouchableOpacity>
 
         )}
@@ -112,7 +118,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   loginButton: {
-    backgroundColor: 'blue',
+    backgroundColor: 'darkblue',
     padding: 10,
     borderRadius: 5,
     marginTop: 20,

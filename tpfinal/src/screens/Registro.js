@@ -29,6 +29,20 @@ export class Registro extends Component {
 
 
   onSubmit = () => {
+    const {email, password, userName} = this.state
+
+    if (!email || !userName || !password) {
+      this.setState({ errMsg: 'Falta que completes los campos' });
+      return;
+    }else if(password.length < 6) {
+      this.setState({ errMsg: "La contraseña tiene menos de 6 caracteres" });
+      
+      return;
+    }else if(!email.includes("@")){
+      this.setState({errMsg:"Completa con un email válido"})
+
+    }
+  
     auth.createUserWithEmailAndPassword(this.state.email, this.state.password)
       .then((response) => {
         if (response) {
@@ -42,12 +56,12 @@ export class Registro extends Component {
               this.props.navigation.navigate('Login')
             })
             .catch((error) => {
-              console.log(error.message);
+              
               this.setState({ errMsg: error.message });
             });
         }
       })
-
+      
 
   }
 
@@ -84,8 +98,8 @@ export class Registro extends Component {
         <TouchableOpacity onPress={() => this.onSubmit(this.state.email, this.state.password)}>
           <Text style={styles.RegistButton}> Registrarte </Text>
         </TouchableOpacity>
-        {this.state.errMsg && <Text>{this.state.errMsg}</Text>}
-        <TouchableOpacity onPress={() => this.props.navigation.navigate("Login")}><Text style= {styles.title}>Ya tenes cuenta? Inicia sesión</Text></TouchableOpacity>
+        {this.state.errMsg && <Text style= {styles.errorText}>{this.state.errMsg}</Text>}
+        <TouchableOpacity style ={styles.botonX}onPress={() => this.props.navigation.navigate("Login")}><Text style= {styles.registerText}>Ya tenes cuenta? Inicia sesión</Text></TouchableOpacity>
 
       </View>
     )
@@ -99,7 +113,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     justifyContent: 'center',
-    color: "#333"
+    color: "black",
+    
   },
   RegistButton: {
     borderRadius: 8,
@@ -134,6 +149,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'lightblue',
     padding: 20,
+  },
+  botonX:{
+    paddingTop:20
+  },
+  registerText:{
+    color:"darkblue",
+    fontSize: 15
   }
 })
 

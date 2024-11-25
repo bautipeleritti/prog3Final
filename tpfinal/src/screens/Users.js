@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
       textAlign:'center'
   },
   userCard: {
-    backgroundColor: "lightblue",
+    backgroundColor: "white",
     padding: 16,
     borderRadius: 12,
     marginBottom: 12,
