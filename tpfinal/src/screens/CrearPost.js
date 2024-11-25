@@ -28,8 +28,8 @@ class CrearPost extends Component{
     render(){
         return(
         <View style={styles.form}>
-            <Text>Nuevo Posteo</Text>
-            <TextInput style={styles.field}
+            <Text style = {styles.title}>Nuevo Posteo</Text>
+            <TextInput style={styles.input}
             keyboardType='default'
             placeholder='Postea algo'
             onChangeText={ text => this.setState({texto:text})}
@@ -45,36 +45,50 @@ class CrearPost extends Component{
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#fff',
+      backgroundColor: 'lightgrey',
       alignItems: 'center',
       justifyContent: 'center',
+      paddingHorizontal: 15,
     },
     form: {
-        paddingHorizontal: 10,
-        marginTop: 20
+        paddingHorizontal: 20,
+        paddingVertical: 30,
+        backgroundColor: '#fff',
+        borderRadius: 12,
+        alignItems: 'center',
     },
-    field:{
-        height: 20,
+    input:{
+        width: '100%',
+        height: 50,
         paddingVertical: 15,
-        paddingHorizontal: 10,
+        marginVertical: 15,
         borderWidth: 1,
-        borderColor: '#ccc',
-        borderStyle: 'solid',
-        borderCurve: 6,
+        borderColor: '#dd',
+        backgroundColor: 'white',
         marginVertical: 10
     },
     boton:{
-        backgroundColor: '#28a745',
-        paddingHorizontal: 10,
-        paddingVertical: 6,
+        backgroundColor: 'darkblue',
+        marginTop: 20,
+        paddingVertical: 12,
         textAlign: 'center',
-        borderCurve: 4,
-        borderWidth: 1,
-        borderStyle:'solid',
-        borderColor: '#28a745'
+        borderRadius: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+        width:'100%'
     },
     botonT:{
-        color: '#fff'
+        color: '#fff', 
+        fontSize: 18,
+        fontWeight: 'bold',
+        textAlign: 'center'
+    },
+    title: {
+       fontSize: 30,
+       fontWeight: 'bold',
+       color: '#333',
+       textAlign: 'center',
+       marginBottom: 20, 
     }
   });
 

@@ -46,10 +46,10 @@ export class Users extends Component {
   render() { 
   
       return (
-          <View>
+          <View style={styles.container}>
               <TextInput
                   style={styles.input}
-                  placeholder="Busca algun usuario"
+                  placeholder="Busca algún usuario"
                   value={this.state.filterValue}
                   onChangeText={this.handleFilterChange}
               />
@@ -59,10 +59,10 @@ export class Users extends Component {
                   <FlatList
                       data={this.state.usuariosFiltrados}
                       keyExtractor={(item) => item.id.toString()}
-                      renderItem={({ item }) => <Text style={styles.userItem}>{item.data.email}</Text>}
+                      renderItem={({ item }) => <View style={styles.userCard}> <Text style={styles.userItem}>{item.data.email}</Text> </View>}
                   />
               ) : (
-                  <Text>El email que estas buscando no existe.</Text>
+                  <Text style= {styles.title}>El email que estas buscando no existe.</Text>
               )}
           </View>
       );
@@ -70,16 +70,46 @@ export class Users extends Component {
 }
 
 const styles = StyleSheet.create({
+    container: {
+        flex:1,
+        backgroundColor: "lightgrey",
+        padding: 15,
+        borderRadius: 15,
+        paddingLeft: "20%",
+    paddingRight: "20%",
+    },
+    title: {
+        fontSize: 20,
+        fontWeight: 100
+    },
   input: {
+    backgroundColor: "white",
+    padding: 16,
       marginBottom: 10,
       paddingHorizontal: 8,
       fontSize: 16,
       borderColor: '#ccc',
       borderWidth: 1,
       borderRadius: 8,
+      textAlign: 'center',
   },
   userItem: {
       fontSize: 18,
       marginBottom: 5,
+      fontWeight: '500',
+      textAlign:'center'
   },
+  userCard: {
+    backgroundColor: "lightblue",
+    padding: 16,
+    borderRadius: 12,
+    marginBottom: 12,
+    alignContent: 'center',
+    width: "100%",
+    alignItems: 'center',
+    justifyContent: 'center',
+    
+
+
+  }
 })

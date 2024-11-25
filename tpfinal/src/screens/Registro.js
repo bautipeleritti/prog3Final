@@ -5,13 +5,11 @@ import { auth, db } from '../firebase/config'
 
 export class Registro extends Component {
   constructor(props) {
-    super(props)
-
-
+    super(props) 
     this.state = {
-      email: " ",
-      password: " ",
-      userName: " ",
+      email: "",
+      password: "",
+      userName: "",
       registered: false,
       errMsg: ""
     };
@@ -56,7 +54,7 @@ export class Registro extends Component {
   render() {
     return (
       <View style={styles.box}>
-        <Text> Crea una cuenta!</Text>
+        <Text style={styles.title}> Crea una cuenta!</Text>
 
         <TextInput
           style={styles.input}
@@ -84,11 +82,10 @@ export class Registro extends Component {
           value={this.state.password} />
 
         <TouchableOpacity onPress={() => this.onSubmit(this.state.email, this.state.password)}>
-          <Text> Registrarte </Text>
+          <Text style={styles.RegistButton}> Registrarte </Text>
         </TouchableOpacity>
         {this.state.errMsg && <Text>{this.state.errMsg}</Text>}
-        <TouchableOpacity style={styles.RegistButton}
-          onPress={() => this.props.navigation.navigate("Login")}><Text>Ya tenes cuenta? Inicia sesión</Text></TouchableOpacity>
+        <TouchableOpacity onPress={() => this.props.navigation.navigate("Login")}><Text style= {styles.title}>Ya tenes cuenta? Inicia sesión</Text></TouchableOpacity>
 
       </View>
     )
@@ -98,27 +95,36 @@ export class Registro extends Component {
 const styles = StyleSheet.create({
   title: {
     fontSize: 24,
+    paddingBottom: 100,
     fontWeight: 'bold',
     textAlign: 'center',
     justifyContent: 'center',
+    color: "#333"
   },
   RegistButton: {
+    borderRadius: 8,
     marginTop: 10,
-    alignItems: 'center',
-    padding: 10,
+    padding: 15,
+    backgroundColor: "darkblue",
+    width: "100%",
+    height: 50,
+    color: "white",
+    fontWeight: 'bold',
+    fontSize: 20
   },
   errorText: {
     color: 'red',
     fontSize: 14,
     textAlign: 'center',
+    marginTop: 10,
   },
   input: {
-    width: '25%',
-    padding: 10,
+    width: '80%',
+    padding: 15,
     marginVertical: 10,
     borderColor: 'black',
     borderWidth: 1,
-    borderRadius: 5,
+    borderRadius: 10,
     fontSize: 15,
     backgroundColor: 'white'
   },
@@ -126,9 +132,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'lightblue'
-
-
+    backgroundColor: 'lightblue',
+    padding: 20,
   }
 })
 
