@@ -9,6 +9,7 @@ class CrearPost extends Component{
         this.state = {
             email: '',
             texto:'',
+            Publicacion: ''
 
               
         };
@@ -20,6 +21,13 @@ class CrearPost extends Component{
             texto: texto,
             likes: [],
             createdAt: Date.now(),
+            }).then(()=> {
+                this.setState({
+                    Publicacion: 'Tu posteo se ha publicado con éxito',
+                    texto: ''
+                }).catch((error) => {
+                    console.error("error al publicar ", error)
+                })
             })
     }
       
@@ -34,8 +42,13 @@ class CrearPost extends Component{
             placeholder='Postea algo'
             onChangeText={ text => this.setState({texto:text})}
             value={this.state.texto}/>
-            <TouchableOpacity onPress={() => this.posteos(auth.currentUser.email, this.state.texto)} style={styles.boton}>    
+            <TouchableOpacity 
+            onPress={() => this.posteos(auth.currentUser.email, this.state.texto)} 
+            style={styles.boton}>    
             <Text style={styles.botonT}>POSTEAR</Text>
+            {this.state.Publicacion ? (
+                <Text style={styles.post}>{this.state.Publicacion}</Text>
+            ): null }
             </TouchableOpacity>
         </View>
         )
@@ -49,6 +62,11 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
       paddingHorizontal: 15,
+    },
+    post: {
+        fontSize: 25,
+        fontWeight: 20,
+        color: 'lightgrey'
     },
     form: {
         paddingHorizontal: 20,
