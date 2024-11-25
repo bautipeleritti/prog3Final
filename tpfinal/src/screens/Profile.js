@@ -6,7 +6,7 @@ export default class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "", 
+      name: "",
       email: auth.currentUser.email,
       posteos: [],
     };
@@ -21,7 +21,7 @@ export default class Profile extends Component {
         .onSnapshot((docs) => {
           docs.forEach((doc) => {
             this.setState({
-              name: doc.data().userName || "Usuario sin nombre", 
+              name: doc.data().userName || "Usuario sin nombre",
             });
           });
         });
@@ -33,7 +33,7 @@ export default class Profile extends Component {
           docs.forEach((doc) => {
             posts.push({
               id: doc.id,
-              data: doc.data(), 
+              data: doc.data(),
             });
           });
           posts.sort((a, b) => b.data.createdAt - a.data.createdAt);
@@ -82,12 +82,12 @@ export default class Profile extends Component {
             </View>
           )}
         />
-       <TouchableOpacity
-         style={styles.logOut}
-         onPress={() => this.handleLogout()}>
-        <Text style={styles.logOutText}>Logout</Text>
+        <TouchableOpacity
+          style={styles.logOut}
+          onPress={() => this.handleLogout()}>
+          <Text style={styles.logOutText}>Logout</Text>
         </TouchableOpacity>
-         </View>
+      </View>
     );
   }
 }
@@ -102,15 +102,15 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: 'bold',
     marginBottom: 20,
-    textAlign:'center'
+    textAlign: 'center'
   },
   info: {
     fontSize: 16,
     marginBottom: 10,
-    padding:15,
-    backgroundColor:"white",
+    padding: 15,
+    backgroundColor: "white",
 
-    
+
 
   },
   post: {
@@ -134,15 +134,15 @@ const styles = StyleSheet.create({
   deleteButtonText: {
     color: 'white',
     fontWeight: 'bold',
-    fontSize:14,
+    fontSize: 14,
   },
-  logOut:{
-    backgroundColor:"darkblue",
+  logOut: {
+    backgroundColor: "darkblue",
     padding: 10,
     borderRadius: 5,
     alignItems: 'center',
   },
-  logOutText:{
+  logOutText: {
     color: "white",
     fontWeight: "bold",
   }

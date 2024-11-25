@@ -16,9 +16,9 @@ import Fontisto from '@expo/vector-icons/Fontisto';
 const Tab = createBottomTabNavigator();
 export class HomeMenu extends Component {
 
-  constructor(){
+  constructor() {
     super()
-    this.state={
+    this.state = {
 
     }
   }
@@ -31,7 +31,7 @@ export class HomeMenu extends Component {
 
     }
     )
-  } 
+  }
 
 
 
@@ -41,11 +41,11 @@ export class HomeMenu extends Component {
   render() {
     return (
 
-      <Tab.Navigator screenOptions={{headerShown: false, tabBarShowLabel:false}}>
-        <Tab.Screen name= "Menu" component={Home} options={{tabBarIcon:()=> <Ionicons name="home" size={24} color="darkblue" />}}/>
-        <Tab.Screen name= "Nuevo Posteo" component={CrearPost} options={{tabBarIcon: () => <Entypo name="new-message" size={24} color="darkblue" />}}/>
-        <Tab.Screen name= "Usuario" component={Users} options={{tabBarIcon: () => <Fontisto name="search" size={24} color="darkblue" />}}/>
-        <Tab.Screen name= "Perfil" component={Profile} options={{tabBarIcon: () => <Ionicons name="person" size={24} color="darkblue" />}}/> 
+      <Tab.Navigator screenOptions={{ headerShown: false, tabBarShowLabel: false }}>
+        <Tab.Screen name="Menu" component={Home} options={{ tabBarIcon: () => <Ionicons name="home" size={24} color="darkblue" /> }} />
+        <Tab.Screen name="Nuevo Posteo" component={CrearPost} options={{ tabBarIcon: () => <Entypo name="new-message" size={24} color="darkblue" /> }} />
+        <Tab.Screen name="Usuario" component={Users} options={{ tabBarIcon: () => <Fontisto name="search" size={24} color="darkblue" /> }} />
+        <Tab.Screen name="Perfil" component={Profile} options={{ tabBarIcon: () => <Ionicons name="person" size={24} color="darkblue" /> }} />
 
       </Tab.Navigator>
     )

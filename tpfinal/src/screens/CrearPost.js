@@ -1,67 +1,67 @@
-import react, {Component} from "react";
-import { TouchableOpacity, View, Text, StyleSheet, FlatList,TextInput } from "react-native";
+import react, { Component } from "react";
+import { TouchableOpacity, View, Text, StyleSheet, FlatList, TextInput } from "react-native";
 import { db, auth } from '../firebase/config';
 
 
-class CrearPost extends Component{
+class CrearPost extends Component {
     constructor() {
         super();
         this.state = {
             email: '',
-            texto:'',
+            texto: '',
             Publicacion: ''
 
-              
+
         };
     }
 
-    posteos(email,texto){
+    posteos(email, texto) {
         db.collection('posts').add({
             email: email,
             texto: texto,
             likes: [],
             createdAt: Date.now(),
-            }).then(()=> {
-                this.setState({
-                    Publicacion: 'Tu posteo se ha publicado con éxito',
-                    texto: ''
-                }).catch((error) => {
-                    console.error("error al publicar ", error)
-                })
+        }).then(() => {
+            this.setState({
+                Publicacion: 'Tu posteo se ha publicado con éxito',
+                texto: ''
+            }).catch((error) => {
+                console.error("error al publicar ", error)
             })
+        })
     }
-      
-     
 
-    render(){
-        return(
-        <View style={styles.form}>
-            <Text style = {styles.title}>Nuevo Posteo</Text>
-            <TextInput style={styles.input}
-            keyboardType='default'
-            placeholder='Postea algo'
-            onChangeText={ text => this.setState({texto:text})}
-            value={this.state.texto}/>
-            <TouchableOpacity 
-            onPress={() => this.posteos(auth.currentUser.email, this.state.texto)} 
-            style={styles.boton}>    
-            <Text style={styles.botonT}>POSTEAR</Text>
-            {this.state.Publicacion ? (
-                <Text style={styles.post}>{this.state.Publicacion}</Text>
-            ): null }
-            </TouchableOpacity>
-        </View>
+
+
+    render() {
+        return (
+            <View style={styles.form}>
+                <Text style={styles.title}>Nuevo Posteo</Text>
+                <TextInput style={styles.input}
+                    keyboardType='default'
+                    placeholder='Postea algo'
+                    onChangeText={text => this.setState({ texto: text })}
+                    value={this.state.texto} />
+                <TouchableOpacity
+                    onPress={() => this.posteos(auth.currentUser.email, this.state.texto)}
+                    style={styles.boton}>
+                    <Text style={styles.botonT}>POSTEAR</Text>
+                    {this.state.Publicacion ? (
+                        <Text style={styles.post}>{this.state.Publicacion}</Text>
+                    ) : null}
+                </TouchableOpacity>
+            </View>
         )
     }
 
 }
 const styles = StyleSheet.create({
     container: {
-      flex: 1,
-      backgroundColor: 'lightgrey',
-      alignItems: 'center',
-      justifyContent: 'center',
-      paddingHorizontal: 15,
+        flex: 1,
+        backgroundColor: 'lightgrey',
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingHorizontal: 15,
     },
     post: {
         fontSize: 25,
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
         borderRadius: 12,
         alignItems: 'center',
     },
-    input:{
+    input: {
         width: '100%',
         height: 50,
         paddingVertical: 15,
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         marginVertical: 10
     },
-    boton:{
+    boton: {
         backgroundColor: 'darkblue',
         marginTop: 20,
         paddingVertical: 12,
@@ -93,21 +93,21 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         alignItems: 'center',
         justifyContent: 'center',
-        width:'100%'
+        width: '100%'
     },
-    botonT:{
-        color: '#fff', 
+    botonT: {
+        color: '#fff',
         fontSize: 18,
         fontWeight: 'bold',
         textAlign: 'center'
     },
     title: {
-       fontSize: 30,
-       fontWeight: 'bold',
-       color: '#333',
-       textAlign: 'center',
-       marginBottom: 20, 
+        fontSize: 30,
+        fontWeight: 'bold',
+        color: '#333',
+        textAlign: 'center',
+        marginBottom: 20,
     }
-  });
+});
 
 export default CrearPost;

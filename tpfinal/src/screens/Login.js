@@ -13,7 +13,7 @@ export default class Login extends Component {
     };
   }
 
-   componentDidMount() {
+  componentDidMount() {
     auth.onAuthStateChanged((usuario) => {
       if (usuario) {
         this.props.navigation.navigate('Login');
@@ -27,14 +27,14 @@ export default class Login extends Component {
     if (!email || !password) {
       this.setState({ error: 'Por favor completa todos los campos' });
       return;
-    }else if(password.length < 6) {
+    } else if (password.length < 6) {
       this.setState({ error: "La contraseña tiene menos de 6 caracteres" });
       return;
-    }else if(!email.includes("@")){
-      this.setState({error:"Completa con un email válido"})
+    } else if (!email.includes("@")) {
+      this.setState({ error: "Completa con un email válido" })
 
     }
-    this.setState({loading: true, error: ''})
+    this.setState({ loading: true, error: '' })
 
     auth
       .signInWithEmailAndPassword(email, password)
@@ -43,17 +43,17 @@ export default class Login extends Component {
         this.props.navigation.navigate('HomeMenu');
       })
       .catch((error) => {
-        this.setState({ error : error.message , loading: false});
+        this.setState({ error: error.message, loading: false });
       });
   };
 
   render() {
-    const { email, password, error , loading} = this.state;
+    const { email, password, error, loading } = this.state;
 
     return (
       <View style={styles.box}>
         <Text style={styles.title}>Login</Text>
-        
+
         <TextInput
           style={styles.input}
           keyboardType="email-address"
@@ -70,18 +70,18 @@ export default class Login extends Component {
           onChangeText={(text) => this.setState({ password: text })}
           value={password}
         />
-                {error ? <Text style={styles.errorText}>{error}</Text> : null}
+        {error ? <Text style={styles.errorText}>{error}</Text> : null}
 
-        { loading ? (
+        {loading ? (
           <ActivityIndicator size="large" color="green" />
         ) : (
           <TouchableOpacity style={styles.loginButton} onPress={this.handleSubmitLogin}>
-          <Text style={styles.buttonText}>Iniciar Sesión</Text>
-        </TouchableOpacity>
+            <Text style={styles.buttonText}>Iniciar Sesión</Text>
+          </TouchableOpacity>
 
         )}
 
-       
+
         <TouchableOpacity
           style={styles.registerButton}
           onPress={() => this.props.navigation.navigate('Registro')}

@@ -37,26 +37,26 @@ class Home extends Component {
         }
         )
     }
-    
-goToProfile = () => {
-    const currentUser = auth.currentUser; 
-    if (currentUser) {
-      this.props.navigation.navigate("Perfil", { email: currentUser.email }); 
-    } else {
-      console.error("No hay un usuario autenticado.");
-    }
-  };
-    
+
+    goToProfile = () => {
+        const currentUser = auth.currentUser;
+        if (currentUser) {
+            this.props.navigation.navigate("Perfil", { email: currentUser.email });
+        } else {
+            console.error("No hay un usuario autenticado.");
+        }
+    };
+
 
 
     render() {
         return (
-            <View style = {styles.flatlist}>
-                <Text style = {styles.home}> Bienvenido a Home </Text>
-               
+            <View style={styles.flatlist}>
+                <Text style={styles.home}> Bienvenido a Home </Text>
+
 
                 {this.state.loading ? <ActivityIndicator /> : <FlatList data={this.state.posts} keyExtractor={(item) => item.id.toString()} renderItem={({ item }) => <Post dataPost={item} />} />}
-                
+
             </View>
         )
     }
@@ -68,10 +68,10 @@ const styles = StyleSheet.create(
             flex: 1
         },
         home: {
-        fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 20,
-    textAlign: 'center'
+            fontSize: 24,
+            fontWeight: 'bold',
+            marginBottom: 20,
+            textAlign: 'center'
         }
     }
 )
