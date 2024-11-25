@@ -7,6 +7,7 @@ import Post from './Post';
 import Profile from '../screens/Profile';
 import { auth } from '../firebase/config';
 import CrearPost from '../screens/CrearPost';
+import { Users } from '../screens/Users';
 
 
 
@@ -39,10 +40,10 @@ export class HomeMenu extends Component {
     return (
 
       <Tab.Navigator>
-        <Tab.Screen name= "Home" component={Home} options={{headerShown: false}}/>
+        <Tab.Screen name= "Menu" component={Home} options={{headerShown: false}}/>
         <Tab.Screen name= "Nuevo Posteo" component={CrearPost} options={{}}/>
-       {/* <Tab.Screen name= "Usuarios" component={Users} options={{}}/>*/}
-        <Tab.Screen name= "Profile" component={Profile} options={{}}/> 
+        <Tab.Screen name= "Usuario" component={Users} options={{}}/>
+        <Tab.Screen name= "Perfil" component={Profile} options={{}}/> 
 
       </Tab.Navigator>
     )
