@@ -16,7 +16,7 @@ export default class Login extends Component {
    componentDidMount() {
     auth.onAuthStateChanged((usuario) => {
       if (usuario) {
-        this.props.navigation.navigate('HomeMenu');
+        this.props.navigation.navigate('Login');
       }
     });
   }
