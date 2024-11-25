@@ -53,12 +53,10 @@ goToProfile = () => {
         return (
             <View style = {styles.flatlist}>
                 <Text style = {styles.home}> Bienvenido a Home </Text>
-                <TouchableOpacity onPress={this.goToProfile}>
-      <Text>Ir a Mi Perfil</Text>
-      </TouchableOpacity>
+               
 
                 {this.state.loading ? <ActivityIndicator /> : <FlatList data={this.state.posts} keyExtractor={(item) => item.id.toString()} renderItem={({ item }) => <Post dataPost={item} />} />}
-                <TouchableOpacity onPress={() => this.props.navigation.navigate("CrearPost")}><Text>Crear Post</Text></TouchableOpacity>
+                
             </View>
         )
     }

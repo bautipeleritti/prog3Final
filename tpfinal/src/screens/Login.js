@@ -16,7 +16,7 @@ export default class Login extends Component {
    componentDidMount() {
     auth.onAuthStateChanged((usuario) => {
       if (usuario) {
-        this.props.navigation.navigate('Home');
+        this.props.navigation.navigate('HomeMenu');
       }
     });
   }
@@ -34,7 +34,7 @@ export default class Login extends Component {
       .signInWithEmailAndPassword(email, password)
       .then(() => {
         this.setState({ error: '', loading: false });
-        this.props.navigation.navigate('Home');
+        this.props.navigation.navigate('HomeMenu');
       })
       .catch((error) => {
         this.setState({ error: "Error al iniciar tu sesión", loading: false});

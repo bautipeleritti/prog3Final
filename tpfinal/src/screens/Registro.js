@@ -21,7 +21,7 @@ export class Registro extends Component {
    componentDidMount() {
     auth.onAuthStateChanged((usuario) => {
       if (usuario) {
-        this.props.navigation.navigate("Home")
+        this.props.navigation.navigate("HomeMenu")
       }
 
     }
@@ -88,7 +88,7 @@ export class Registro extends Component {
         </TouchableOpacity>
         {this.state.errMsg && <Text>{this.state.errMsg}</Text>}
         <TouchableOpacity style={styles.RegistButton}
-          onPress={() => this.props.navigation.navigate("Login")}><Text>Ir a login</Text></TouchableOpacity>
+          onPress={() => this.props.navigation.navigate("Login")}><Text>Ya tenes cuenta? Inicia sesión</Text></TouchableOpacity>
 
       </View>
     )
